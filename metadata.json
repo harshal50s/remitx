@@ -1,0 +1,6 @@
+{
+  "name": "TrustBridge | UPI Cross-Border Remittance Layer",
+  "description": "UPI-linked cross-border remittance layer with instant KYC reuse, AI legality and FEMA compliance engine, locked FX rates, and Citi global settlement netting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
