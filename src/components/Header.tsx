@@ -16,9 +16,9 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3.5">
+      <div className="max-w-[1440px] mx-auto grid grid-cols-[auto_1fr] items-center gap-4 px-6 py-3.5 lg:grid-cols-[auto_minmax(0,1fr)_auto] xl:gap-6">
         {/* Zone 1: Single text element wordmark */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-self-end gap-3">
           <button
             onClick={() => setActiveTab("remit")}
             className="flex items-center gap-2.5 text-left group"
@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Zone 2: 4-6 clean text navigation links */}
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
+        <nav className="hidden min-w-0 items-center justify-center gap-3 text-xs font-medium lg:flex xl:gap-5 xl:text-sm 2xl:gap-6">
           <button
             onClick={() => setActiveTab("remit")}
             className={`transition-colors whitespace-nowrap cursor-pointer py-1 ${
@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
                 : "text-slate-400 hover:text-slate-100"
             }`}
           >
-            AI Legality Engine
+            AI Compliance Assessment
           </button>
           <button
             onClick={() => setActiveTab("netting")}
@@ -82,13 +82,13 @@ export const Header: React.FC<HeaderProps> = ({
                 : "text-slate-400 hover:text-slate-100"
             }`}
           >
-            Regulatory Architecture
+            Architecture & Protocol
           </button>
         </nav>
 
         {/* Zone 3: 1-2 primary actions */}
         <div className="flex items-center gap-3">
-          <div className="hidden lg:flex items-center gap-2 text-xs text-slate-400 px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800">
+          <div className="hidden 2xl:flex items-center gap-2 text-xs text-slate-400 px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="tabular-nums font-mono text-slate-300">Citi Liquidity: ${totalLiquidityUSD}</span>
           </div>

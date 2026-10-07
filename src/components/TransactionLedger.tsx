@@ -239,7 +239,7 @@ export const TransactionLedger: React.FC<TransactionLedgerProps> = ({
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">
-                  AI Legality Engine Compliance Finding:
+                  AI-Assisted Compliance Assessment Finding:
                 </span>
                 <span className="text-xs font-mono font-bold text-emerald-400">
                   Score: {selectedTxn.aiScore}/100

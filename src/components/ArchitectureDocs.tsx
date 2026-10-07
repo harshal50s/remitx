@@ -24,7 +24,10 @@ export const ArchitectureDocs: React.FC = () => {
           </h2>
           <p className="text-sm text-slate-300 mt-2 leading-relaxed">
             Cross-border retail remittance from India has historically suffered from prohibitive fees (3-5% FX markups + $35 SWIFT wire charges), multi-day settlement delays, and onerous manual compliance.
-            TrustBridge re-engineers this pipeline by bridging NPCI's domestic instant UPI rail with Citi's global liquidity network, backed by a real-time AI Legality Engine.
+            TrustBridge simulates a compliance-first pipeline: UPI-funded remittances undergo AI-assisted regulatory assessment before any settlement, then route through Citi's global liquidity network for local payout.
+          </p>
+          <p className="text-xs text-amber-400/70 font-mono mt-2">
+            ⚠️ Prototype simulation — not a live money-transfer service. Configured regulatory rules + AI reasoning, not a legal compliance guarantee.
           </p>
         </div>
       </div>
@@ -43,7 +46,7 @@ export const ArchitectureDocs: React.FC = () => {
             </div>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Money enters TrustBridge <strong>exclusively from the sender's own verified primary bank account</strong> via UPI Collect / Auto-debit. Third-party deposits, cash top-ups, and intermediate wallet pooling are mathematically prevented.
+            Money enters TrustBridge <strong>exclusively from the sender's own verified primary bank account</strong> via UPI Collect / Auto-debit. Third-party deposits, cash top-ups, and intermediate account pooling are prevented by design.
           </p>
           <div className="p-3 rounded-lg bg-slate-950 border border-slate-800/80 text-xs text-slate-400 space-y-1">
             <div className="font-semibold text-slate-200">Regulatory Impact:</div>
@@ -75,7 +78,7 @@ export const ArchitectureDocs: React.FC = () => {
           </div>
         </div>
 
-        {/* Pillar 3: AI Legality Engine */}
+        {/* Pillar 3: AI-Assisted Compliance Assessment */}
         <div className="rounded-xl bg-slate-900/90 border border-slate-800 p-6 shadow-xl space-y-3">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
@@ -83,16 +86,16 @@ export const ArchitectureDocs: React.FC = () => {
             </div>
             <div>
               <span className="text-[10px] font-mono text-emerald-400 uppercase">Invariant 03</span>
-              <h3 className="text-base font-bold text-white">Pre-Transaction AI Legality Scoring</h3>
+              <h3 className="text-base font-bold text-white">Pre-Transaction AI-Assisted Compliance Assessment</h3>
             </div>
           </div>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Every transaction is evaluated in real time by the Gemini AI Legality Engine <strong>before any money moves</strong>. It audits FEMA 1999 Schedule I & III permissible purpose codes, sanctions watchlists, and the $250,000 LRS fiscal year ceiling.
+            Every transaction is evaluated using AI-assisted compliance reasoning combined with configured regulatory rules <strong>before any money moves</strong>. Assessment covers FEMA 1999 Schedule I &amp; III purpose-code permissibility, configured sanctions watchlists, and the $250,000 LRS fiscal year ceiling.
           </p>
           <div className="p-3 rounded-lg bg-slate-950 border border-slate-800/80 text-xs text-slate-400 space-y-1">
-            <div className="font-semibold text-slate-200">Regulatory Impact:</div>
+            <div className="font-semibold text-slate-200">Compliance Impact (Simulated):</div>
             <p>
-              Produces an immutable, human-readable legal explanation and cryptographic audit certificate for bank compliance officers, eliminating manual audit backlog.
+              Generates a human-readable compliance explanation and audit record for each remittance decision. This is an AI-assisted assessment, not a legally binding regulatory certification.
             </p>
           </div>
         </div>
@@ -142,28 +145,28 @@ export const ArchitectureDocs: React.FC = () => {
                 <td className="py-2.5 px-3 font-mono text-cyan-400">S0305</td>
                 <td className="py-2.5 px-3 font-mono text-slate-300">$250,000 / FY</td>
                 <td className="py-2.5 px-3 text-slate-400">0.5% (Loan) / 5% &gt; ₹7L</td>
-                <td className="py-2.5 px-3 font-mono text-emerald-400">Instant Approved</td>
+                <td className="py-2.5 px-3 font-mono text-emerald-400">Simulated Approved</td>
               </tr>
               <tr>
                 <td className="py-2.5 px-3 font-medium text-slate-200">Maintenance of Close Relative</td>
                 <td className="py-2.5 px-3 font-mono text-cyan-400">S1107</td>
                 <td className="py-2.5 px-3 font-mono text-slate-300">$250,000 / FY</td>
                 <td className="py-2.5 px-3 text-slate-400">20% on excess &gt; ₹7L</td>
-                <td className="py-2.5 px-3 font-mono text-emerald-400">Instant Approved</td>
+                <td className="py-2.5 px-3 font-mono text-emerald-400">Simulated Approved</td>
               </tr>
               <tr>
                 <td className="py-2.5 px-3 font-medium text-slate-200">Private International Travel</td>
                 <td className="py-2.5 px-3 font-mono text-cyan-400">S0102</td>
                 <td className="py-2.5 px-3 font-mono text-slate-300">$250,000 / FY</td>
                 <td className="py-2.5 px-3 text-slate-400">20% on excess &gt; ₹7L</td>
-                <td className="py-2.5 px-3 font-mono text-emerald-400">Instant Approved</td>
+                <td className="py-2.5 px-3 font-mono text-emerald-400">Simulated Approved</td>
               </tr>
               <tr>
                 <td className="py-2.5 px-3 font-medium text-slate-200">Medical Treatment Overseas</td>
                 <td className="py-2.5 px-3 font-mono text-cyan-400">S0001</td>
                 <td className="py-2.5 px-3 font-mono text-slate-300">$250,000 / FY</td>
                 <td className="py-2.5 px-3 text-slate-400">5% on excess &gt; ₹7L</td>
-                <td className="py-2.5 px-3 font-mono text-emerald-400">Instant Approved</td>
+                <td className="py-2.5 px-3 font-mono text-emerald-400">Simulated Approved</td>
               </tr>
               <tr className="bg-rose-950/20">
                 <td className="py-2.5 px-3 font-medium text-rose-300">Speculative Crypto / Margin FX</td>

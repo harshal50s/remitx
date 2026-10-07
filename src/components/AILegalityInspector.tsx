@@ -84,31 +84,33 @@ export const AILegalityInspector: React.FC<AILegalityInspectorProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-semibold uppercase text-emerald-400">
-                  Pre-Transaction Legality Engine
+                  Pre-Transaction Compliance Assessment
                 </span>
                 <span className="text-slate-600">·</span>
-                <span className="text-xs text-slate-400">FEMA 1999 & RBI LRS Guardrail</span>
+                <span className="text-xs text-slate-400">Configured FEMA 1999 Rules + AI Reasoning</span>
               </div>
               <h2 className="text-lg font-bold text-white mt-0.5">
-                AI Legality & Compliance Verification Core
+                AI-Assisted Compliance Verification
               </h2>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="px-3 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-cyan-400">
-              Model: Gemini 3.8 Flash
+              Engine: Gemini + Rule-Based
             </span>
             <span className="px-3 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-emerald-400">
-              Latency: &lt;450ms
+              Latency: &lt;500ms
             </span>
           </div>
         </div>
 
         <p className="text-xs text-slate-300 mt-4 leading-relaxed max-w-4xl">
-          Unlike traditional banking where compliance checks take days or occur post-clearing via human review,
-          TrustBridge's AI Legality Engine scores every single transaction <strong className="text-white">before money moves</strong>.
-          It inspects the inbound UPI sender's verified bank linkage, verifies FEMA 1999 Schedule I & III permissibility, tracks fiscal year $250,000 LRS ceilings, computes Section 206C(1G) TCS tax obligations, and generates a human-readable legal explanation for every clearance decision.
+          TrustBridge evaluates every remittance using configured regulatory rules and AI-assisted reasoning <strong className="text-white">before money moves</strong>.
+          The assessment covers FEMA 1999 Schedule I &amp; III purpose-code permissibility, fiscal year $250,000 LRS ceiling tracking, Section 206C(1G) TCS tax computation, and PMLA single-origin verification — generating a human-readable compliance explanation for each decision.
+        </p>
+        <p className="text-xs text-amber-400/70 font-mono mt-2 border-t border-slate-800/60 pt-3">
+          ⚠️ AI-assisted compliance assessment — not a legally binding regulatory determination. Always consult a qualified legal or compliance officer for binding advice.
         </p>
       </div>
 
@@ -154,7 +156,7 @@ export const AILegalityInspector: React.FC<AILegalityInspectorProps> = ({
                       </span>
                     </div>
                     <div className="text-xs text-slate-400 mt-0.5">
-                      Evaluated by: {activeResult.evaluatedBy || "TrustBridge Gemini AI Legality Engine"}
+                      Evaluated by: {activeResult.evaluatedBy || "TrustBridge AI-Assisted Compliance Engine"}
                     </div>
                   </div>
                 </div>

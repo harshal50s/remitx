@@ -216,7 +216,7 @@ export const PRESET_SCENARIOS = [
   },
   {
     label: "Prohibited Crypto Scheme ($1,500 USD - AI Block)",
-    description: "Tests the AI legality engine's ability to intercept and halt FEMA Schedule I violations before UPI debit",
+    description: "Tests the AI compliance assessment's ability to intercept and halt FEMA Schedule I violations before UPI debit",
     senderName: "Vikram Malhotra",
     senderVpa: "vikram@kotak",
     senderBank: "Kotak Mahindra Bank (A/C ****7732)",

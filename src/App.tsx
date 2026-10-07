@@ -9,6 +9,7 @@ import { ArchitectureDocs } from "./components/ArchitectureDocs";
 import { AuditCertificateModal } from "./components/AuditCertificateModal";
 import { ComplianceEvaluation, TransactionRecord } from "./types/remittance";
 import { ArrowUpRight, ShieldCheck, Zap, Layers, RefreshCw } from "lucide-react";
+import heroSettlementRails from "./assets/images/hero_settlement_rails_1791371311740.jpg";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>("remit");
@@ -88,29 +89,33 @@ export default function App() {
             <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-cyan-950/60 border border-cyan-800/60 text-xs font-mono text-cyan-300">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span>UPI Inbound · Citi Netting · AI Legality Engine</span>
+                <span>UPI Funding · AI Compliance · FX Lock · Citi Netting · Local Payout</span>
               </div>
 
               <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                Instant UPI Cross-Border Remittances. Zero SWIFT Hops. Zero Crypto.
+                Compliance-First Cross-Border Remittances. Zero SWIFT Hops. Zero Crypto.
               </h1>
 
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
-                The sender pays through UPI strictly from their verified domestic bank account.
-                Citi's global network handles settlement and local payout abroad, and the real-time AI legality engine scores every transaction before money moves—with a human-readable explanation for each regulatory decision.
+                UPI-powered funding with AI-assisted compliance, transparent FX, institutional liquidity and auditable settlement.
+                The sender pays through their verified Indian bank account; compliance runs before the money moves — not after.
+              </p>
+
+              <p className="text-xs text-amber-400/80 font-mono border border-amber-800/40 bg-amber-950/20 rounded px-3 py-1.5 w-fit">
+                ⚠️ Prototype simulation — not a live money-transfer service or legal determination.
               </p>
 
               {/* Mechanism Chain */}
               <div className="pt-2 flex flex-wrap items-center gap-3 text-xs text-slate-400 font-mono">
-                <span className="text-slate-200">NPCI UPI Rail</span>
+                <span className="text-slate-200">UPI Funding</span>
                 <span>→</span>
-                <span className="text-slate-200">CKYC Reuse</span>
+                <span className="text-slate-200">Verified KYC</span>
                 <span>→</span>
-                <span className="text-emerald-400">Gemini Legality</span>
+                <span className="text-emerald-400">AI Compliance</span>
                 <span>→</span>
-                <span className="text-slate-200">Guaranteed FX</span>
+                <span className="text-slate-200">Locked FX</span>
                 <span>→</span>
-                <span className="text-purple-400">Citi Bulk Netting</span>
+                <span className="text-purple-400">Citi Netting</span>
                 <span>→</span>
                 <span className="text-cyan-400">Local Payout</span>
               </div>
@@ -120,7 +125,7 @@ export default function App() {
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl group">
                 <img
-                  src="/src/assets/images/hero_settlement_rails_1791371311740.jpg"
+                  src={heroSettlementRails}
                   alt="TrustBridge Global Liquidity Settlement Network"
                   referrerPolicy="no-referrer"
                   className="w-full h-56 object-cover object-center group-hover:scale-105 transition-transform duration-500"
@@ -179,19 +184,20 @@ export default function App() {
           <div className="flex items-center gap-2">
             <span className="font-bold text-white tracking-tight">TrustBridge</span>
             <span className="text-slate-600">·</span>
-            <span>UPI Cross-Border Remittance & Liquidity Netting Layer</span>
+            <span>Compliance-First Cross-Border Remittance Layer</span>
           </div>
 
           <div className="flex items-center gap-6 text-slate-400">
-            <span>FEMA 1999 Compliant</span>
+            <span>Configured FEMA 1999 Rules</span>
             <span>·</span>
             <span>PMLA Rule 3(1) Single-Origin</span>
             <span>·</span>
             <span>RBI Master Direction No. 7/2015-16</span>
           </div>
 
-          <div className="text-slate-500 font-mono text-[11px]">
-            Zero SWIFT Hops · Zero Volatile Crypto
+          <div className="text-slate-500 font-mono text-[11px] text-center">
+            <div>Zero SWIFT Hops · Zero Volatile Crypto</div>
+            <div className="text-amber-600/60 mt-0.5">Prototype simulation — not a live service or legal determination.</div>
           </div>
         </div>
       </footer>

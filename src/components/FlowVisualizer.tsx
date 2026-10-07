@@ -37,19 +37,19 @@ export const FLOW_STEPS = [
     icon: UserCheck,
     accent: "from-cyan-500 to-blue-600",
     description:
-      "Reuses verified domestic bank KYC via Central KYC (CKYC) registry token. No redundant document uploads, no 48-hour wait.",
-    specs: ["CKYC 14-digit token", "PAN validation", "Real-time Aadhaar linkage verification"],
+      "Reuses verified domestic bank KYC via Central KYC (CKYC) registry. No redundant document uploads, no 48-hour wait.",
+    specs: ["CKYC 14-digit identifier", "PAN validation", "Real-time Aadhaar linkage verification"],
   },
   {
     id: "risk",
     stepNumber: "03",
-    title: "AI Legality Engine",
-    sub: "FEMA & LRS Scoring",
+    title: "AI Compliance Assessment",
+    sub: "Configured FEMA & LRS Rules",
     icon: Cpu,
     accent: "from-emerald-500 to-teal-600",
     description:
-      "Gemini AI legality engine scores transaction legality and regulatory compliance BEFORE money moves, with full human-readable explanations citing RBI Master Directions.",
-    specs: ["RBI Schedule III FEMA checks", "LRS $250k ceiling tracker", "Sanction/PEP watchlist screening"],
+      "AI-assisted compliance assessment evaluates every remittance using configured regulatory rules BEFORE money moves, with human-readable explanations citing RBI Master Directions. Not a legally binding determination.",
+    specs: ["Configured FEMA Schedule III checks", "LRS $250k ceiling tracker", "Sanction/PEP screening"],
   },
   {
     id: "fx",
@@ -120,7 +120,7 @@ export const FlowVisualizer: React.FC<FlowVisualizerProps> = ({
           </span>
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800/80 border border-slate-700/60 font-mono text-slate-300">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            FEMA Compliant
+            Configured FEMA Rules
           </span>
         </div>
       </div>

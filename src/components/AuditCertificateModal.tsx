@@ -79,7 +79,7 @@ export const AuditCertificateModal: React.FC<AuditCertificateModalProps> = ({
               {isApproved ? (
                 <div className="px-3 py-1.5 rounded-lg bg-emerald-950/60 border border-emerald-600/40 text-emerald-400 text-xs font-mono font-bold flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4" />
-                  <span>REGULATORY COMPLIANT</span>
+                  <span>APPROVED UNDER CONFIGURED RULES</span>
                 </div>
               ) : (
                 <div className="px-3 py-1.5 rounded-lg bg-rose-950/60 border border-rose-600/40 text-rose-400 text-xs font-mono font-bold flex items-center gap-1.5">
@@ -145,10 +145,10 @@ export const AuditCertificateModal: React.FC<AuditCertificateModalProps> = ({
             <div className="flex items-center gap-2 truncate">
               <Lock className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
               <span className="truncate">
-                Audited & Digitally Sealed by TrustBridge AI Legality Core (Gemini 3.8 Flash)
+                AI-Assisted Assessment by TrustBridge Compliance Engine (Gemini + Configured FEMA Rules)
               </span>
             </div>
-            <span className="text-emerald-400 shrink-0 font-semibold ml-2">Citi Clearance Approved</span>
+            <span className="text-amber-400/70 shrink-0 font-semibold ml-2">Prototype Simulation</span>
           </div>
         </div>
 

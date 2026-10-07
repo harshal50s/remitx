@@ -237,7 +237,7 @@ function evaluateRuleBasedCompliance(data: {
   const { amountINR, purposeCode, senderVpa, recipientName, lrsUtilizedYTD } = data;
   const isSuspectPurpose = ["GAMBLING", "CRYPTO", "LOTTERY", "MARGIN_FX", "CALL_BACK"].some((k) =>
     purposeCode.toUpperCase().includes(k)
-  );
+  ) || purposeCode.toUpperCase().includes("PROHIBITED");
 
   const approxUSD = amountINR / 86.0;
   const projectedTotal = lrsUtilizedYTD + approxUSD;
@@ -297,10 +297,10 @@ function evaluateRuleBasedCompliance(data: {
     status: "APPROVED" as const,
     legalityScore: 97,
     confidenceScore: 98,
-    humanReadableExplanation: `APPROVED: Fully compliant with RBI FEMA 1999 guidelines for current account remittance under purpose code ${purposeCode}. Inbound payment originates strictly from sender's verified bank VPA (${senderVpa}), meeting PMLA single-origin requirements without third-party pay-in or SWIFT transit risk.`,
+    humanReadableExplanation: `APPROVED (under configured compliance rules): This remittance has been assessed as permissible under the RBI FEMA 1999 configured rule set for current account transactions under purpose code ${purposeCode}. Inbound payment originates strictly from the sender's own verified bank account via UPI VPA (${senderVpa}), satisfying the PMLA single-origin mandate with no third-party pay-in or SWIFT intermediary transit risk. This is an AI-assisted compliance assessment — not a legally binding regulatory determination.`,
     regulatoryBasis: [
       "FEMA 1999 Section 5 (Permissible Current Account Remittances)",
-      "RBI Master Direction on LRS (Annual cap compliant)",
+      "RBI Master Direction on LRS (Configured annual cap check)",
       "PMLA Rule 3(1) Verified Primary KYC Reuse",
       isTCSAboveThreshold ? "Section 206C(1G) IT Act TCS Computed" : "Below ₹7 Lakh TCS threshold",
     ],
@@ -443,7 +443,7 @@ Return your evaluation strictly in the requested JSON format. Include a thorough
         res.json({
           ...parsed,
           timestamp: new Date().toISOString(),
-          evaluatedBy: "TrustBridge Gemini AI Legality Engine (v3.8-Flash)",
+          evaluatedBy: "TrustBridge AI-Assisted Compliance Assessment (Gemini + Configured FEMA Rules)",
         });
         return;
       } catch (geminiError) {
@@ -463,7 +463,7 @@ Return your evaluation strictly in the requested JSON format. Include a thorough
     res.json({
       ...fallbackResult,
       timestamp: new Date().toISOString(),
-      evaluatedBy: "TrustBridge Deterministic Compliance Engine (FEMA 1999 Standard)",
+      evaluatedBy: "TrustBridge Configured Compliance Engine (FEMA 1999 Rule-Based Assessment)",
     });
   } catch (err: any) {
     console.error("Compliance error:", err);
@@ -523,7 +523,36 @@ app.post("/api/execute-settlement", async (req, res) => {
       complianceResult,
     } = req.body;
 
-    const pool = citiLiquidityPools[recipientCurrency as keyof typeof citiLiquidityPools] || citiLiquidityPools.USD;
+    if (
+      typeof amountINR !== "number" ||
+      !Number.isFinite(amountINR) ||
+      amountINR <= 0 ||
+      typeof purposeCode !== "string" ||
+      typeof recipientCurrency !== "string" ||
+      !Object.prototype.hasOwnProperty.call(citiLiquidityPools, recipientCurrency)
+    ) {
+      res.status(400).json({ error: "Invalid settlement parameters" });
+      return;
+    }
+
+    if (complianceResult?.status !== "APPROVED") {
+      res.status(403).json({ error: "Settlement requires an approved compliance evaluation" });
+      return;
+    }
+
+    const settlementEvaluation = evaluateRuleBasedCompliance({
+      amountINR,
+      purposeCode,
+      senderVpa: senderVpa || "sender@verifiedbank",
+      recipientName: recipientName || "Foreign Beneficiary",
+      lrsUtilizedYTD: 24500,
+    });
+    if (settlementEvaluation.status !== "APPROVED") {
+      res.status(403).json({ error: "Transfer is not eligible for settlement" });
+      return;
+    }
+
+    const pool = citiLiquidityPools[recipientCurrency as keyof typeof citiLiquidityPools];
     const amountForeign = Number((amountINR * pool.lockedRate).toFixed(2));
 
     const newTxnId = `TB-TXN-${Math.floor(100000 + Math.random() * 900000)}`;

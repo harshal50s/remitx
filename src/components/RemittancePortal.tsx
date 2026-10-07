@@ -55,6 +55,7 @@ export const RemittancePortal: React.FC<RemittancePortalProps> = ({
   const [evaluation, setEvaluation] = useState<ComplianceEvaluation | null>(null);
   const [showUpiModal, setShowUpiModal] = useState<boolean>(false);
   const [upiPin, setUpiPin] = useState<string>("4821");
+  const [upiPinError, setUpiPinError] = useState<string | null>(null);
   const [executionStep, setExecutionStep] = useState<number>(-1);
   const [completedTxn, setCompletedTxn] = useState<TransactionRecord | null>(null);
 
@@ -130,7 +131,13 @@ export const RemittancePortal: React.FC<RemittancePortalProps> = ({
   // Confirm and Execute Transfer
   const handleConfirmAndPay = async () => {
     if (!evaluation) return;
+    if (upiPin !== "4821") {
+      setUpiPinError("Incorrect sandbox PIN. Enter 4821 to continue.");
+      return;
+    }
+
     setShowUpiModal(false);
+    setUpiPinError(null);
     setExecutionStep(0);
 
     const payload = {
@@ -426,12 +433,12 @@ export const RemittancePortal: React.FC<RemittancePortalProps> = ({
                 {isEvaluating ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin text-slate-950" />
-                    <span>Gemini AI Legality Engine Evaluating FEMA & LRS Rules...</span>
+                    <span>AI Compliance Assessment Running (FEMA & LRS Rules)...</span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4 text-slate-950" />
-                    <span>Evaluate AI Legality & Lock Guaranteed FX Rate</span>
+                    <span>Evaluate Compliance & Lock FX Rate</span>
                     <ArrowRight className="w-4 h-4 text-slate-950" />
                   </>
                 )}
@@ -448,9 +455,12 @@ export const RemittancePortal: React.FC<RemittancePortalProps> = ({
               <h4 className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
                 Cost & Execution Comparison
               </h4>
-              <span className="text-[11px] text-emerald-400 font-semibold font-mono">
-                Save ₹{totalSavingsINR.toLocaleString()}
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[11px] text-emerald-400 font-semibold font-mono">
+                  Save ₹{totalSavingsINR.toLocaleString()}
+                </span>
+                <span className="text-[10px] text-slate-500 font-mono">(Simulated)</span>
+              </div>
             </div>
 
             <div className="mt-4 space-y-3">
@@ -502,7 +512,7 @@ export const RemittancePortal: React.FC<RemittancePortalProps> = ({
             </div>
 
             <div className="mt-4 p-2.5 rounded bg-slate-950/90 border border-slate-800 text-[11px] text-slate-400">
-              💡 Why zero SWIFT fee? Money never leaves domestic banking in individual wires. Inbound UPI enters Citi Mumbai Vostro, and Citi disburses from pre-funded foreign accounts, batch-netting the aggregate ledger.
+              💡 <strong className="text-slate-300">Simulated comparison:</strong> In this model, money never leaves domestic banking in individual wires. Inbound UPI enters Citi Mumbai Vostro, and Citi disburses from pre-funded foreign accounts, batch-netting the aggregate ledger.
             </div>
           </div>
 
@@ -536,7 +546,7 @@ export const RemittancePortal: React.FC<RemittancePortalProps> = ({
                           : "text-rose-400"
                       }`}
                     >
-                      AI LEGALITY SCORE: {evaluation.legalityScore}/100
+                      AI COMPLIANCE SCORE: {evaluation.legalityScore}/100
                     </span>
                     <div className="text-[11px] text-slate-400">
                       Status: {evaluation.status.replace(/_/g, " ")}
@@ -589,7 +599,10 @@ export const RemittancePortal: React.FC<RemittancePortalProps> = ({
               {/* Trigger Payment Button if Approved */}
               {evaluation.status === "APPROVED" && !completedTxn && (
                 <button
-                  onClick={() => setShowUpiModal(true)}
+                  onClick={() => {
+                    setUpiPinError(null);
+                    setShowUpiModal(true);
+                  }}
                   className="mt-4 w-full py-2.5 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
                 >
                   <Lock className="w-3.5 h-3.5" />
@@ -610,19 +623,19 @@ export const RemittancePortal: React.FC<RemittancePortalProps> = ({
             <div className="rounded-xl bg-slate-900/90 border border-emerald-500/80 p-5 shadow-2xl">
               <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                <span>Transfer Settled Successfully!</span>
+                <span>Simulated Settlement Complete!</span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed">
-                ₹{completedTxn.amountINR.toLocaleString()} debited from {completedTxn.senderBank}. Foreign payout of{" "}
+                ₹{completedTxn.amountINR.toLocaleString()} simulated UPI debit from {completedTxn.senderBank}. Simulated local payout of{" "}
                 <span className="font-bold text-emerald-400">
                   {completedTxn.recipientCurrency} {completedTxn.amountForeign.toLocaleString()}
                 </span>{" "}
-                disbursed via {corridor.clearingRail} to {completedTxn.recipientName}.
+                dispatched via {corridor.clearingRail} to {completedTxn.recipientName}.
               </p>
               <div className="mt-3 p-3 rounded-lg bg-slate-950 font-mono text-[11px] text-slate-300 space-y-1">
                 <div>Txn Ref: {completedTxn.id}</div>
                 <div>Citi Batch: {completedTxn.bulkBatchId}</div>
-                <div>Latency: {(completedTxn.settlementLatencyMs / 1000).toFixed(1)}s</div>
+                <div>Simulated Latency: {(completedTxn.settlementLatencyMs / 1000).toFixed(1)}s</div>
                 <div className="text-cyan-400 truncate">Audit Hash: {completedTxn.auditHash}</div>
               </div>
             </div>
@@ -674,12 +687,20 @@ export const RemittancePortal: React.FC<RemittancePortalProps> = ({
                 type="password"
                 maxLength={4}
                 value={upiPin}
-                onChange={(e) => setUpiPin(e.target.value)}
+                onChange={(e) => {
+                  setUpiPin(e.target.value.replace(/\D/g, "").slice(0, 4));
+                  setUpiPinError(null);
+                }}
                 className="w-full text-center tracking-[1em] font-mono text-xl py-2 bg-slate-950 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-400"
               />
               <span className="text-[10px] text-slate-500 block text-center mt-1">
                 Simulated Sandbox PIN (Default: 4821)
               </span>
+              {upiPinError && (
+                <span role="alert" className="text-[11px] text-rose-400 block text-center mt-2">
+                  {upiPinError}
+                </span>
+              )}
             </div>
 
             <div className="flex gap-2 pt-2">
